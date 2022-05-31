@@ -28,14 +28,25 @@ playing = True
 active_length = 0
 active_beat = 0
 beat_changed = True
+kit = 1
 
 # load in sounds
-hi_hat = mixer.Sound('./sounds/hi hat.WAV')
-clap = mixer.Sound('./sounds/clap.WAV')
-crash = mixer.Sound('./sounds/crash.WAV')
-kick = mixer.Sound('./sounds/kick.WAV')
-snare = mixer.Sound('./sounds/snare.WAV')
-tom = mixer.Sound('./sounds/tom.WAV')
+if kit == 1:
+    hi_hat = mixer.Sound('./sounds/hi hat.WAV')
+    clap = mixer.Sound('./sounds/clap.WAV')
+    crash = mixer.Sound('./sounds/crash.WAV')
+    kick = mixer.Sound('./sounds/kick.WAV')
+    snare = mixer.Sound('./sounds/snare.WAV')
+    tom = mixer.Sound('./sounds/tom.WAV')
+
+elif kit == 2:
+    hi_hat = mixer.Sound('./sounds/kit2/hi hat.WAV')
+    clap = mixer.Sound('./sounds/kit2/clap.WAV')
+    crash = mixer.Sound('./sounds/kit2/crash.WAV')
+    kick = mixer.Sound('./sounds/kit2/kick.WAV')
+    snare = mixer.Sound('./sounds/kit2/snare.WAV')
+    tom = mixer.Sound('./sounds/kit2/tom.WAV')
+
 pygame.mixer.set_num_channels(instruments * 3)
 
 def play_notes():
@@ -92,6 +103,7 @@ def draw_grid(clicked, beat):
         active = pygame.draw.rect(screen, blue, [beat * ((WIDTH - 200) // beats) + 200, 0, ((WIDTH - 200) // beats), instruments * 100], 5, 3)
     return boxes
 
+# GAME LOOP
 run = True
 while run:
     timer.tick(fps)
@@ -112,7 +124,7 @@ while run:
                     coords = boxes[i][1]
                     clicked[coords[1]][coords[0]] *= -1 
 
-    beat_length = 3600 //bpm
+    beat_length = 3600 // bpm
 
     if playing:
         if active_length < beat_length:
