@@ -66,7 +66,7 @@ def play_notes():
             if i == 4:
                 clap.play()
             if i == 5:
-                tom.play()
+                some.play()
             if i == 6:
                 some.play()
 
